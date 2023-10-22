@@ -34,6 +34,10 @@ class tea5767_i2c
 {
 public:  
 
+    /*! \brief   Class constructor.
+    *  \ingroup tea5767_i2c
+    *
+    */
     tea5767_i2c(uint8_t band_mode); // Constructor
 
     /************************************
@@ -42,7 +46,7 @@ public:
     // ----------------------------------------------------------------------------
     // Setup
 
-    /*! \brief   Initialize an struct with the parameters needed for initialization.
+    /*! \brief   Initialize the parameters needed for setup().
     *  \ingroup tea5767_i2c
     *
     * TO DO
@@ -55,24 +59,14 @@ public:
     * This function reads the raw data from the TEA5757 radio using the tea5767_read_raw() function,
     * extracts the frequency values from the read buffer, and calculates the frequency in MHz.
     * The extracted frequency is then printed to stdout with two decimal places.
-    * @param radio The TEA5757_t structure representing the radio device.
     * @note This function assumes that the TEA5757 radio device has been initialized and is currently powered on.
     * @return void
     */
     float tea5767_getStation();
 
-    /*! @brief Initializes the TEA5757_t structure for the TEA5757 tuner.
-    * This function initializes the TEA5757_t structure with the default values for the TEA5757 tuner.
-    * The default I2C address of the tuner is 0x60.
-    * @return TEA5757_t The TEA5757_t structure initialized with default values.
-    * @note This function must be called before using any other function related to the TEA5757 tuner.
-    */
-    int tea5767_getReady();
-
     /*! @brief Configures the search mode and direction of the TEA5757 tuner.
     * This function sets the search mode and direction of the TEA5757 tuner. It updates the values of the TEA5757_t structure
     * with the given search mode and search direction and then writes them to the tuner using the tea5767_write_registers() function.
-    * @param radio A pointer to the TEA5757_t structure representing the tuner.
     * @param searchMode An 8-bit unsigned integer specifying the search mode to use. Valid values are:
 
     * TEA5767_SEARCH_MUTE_LOW
@@ -83,18 +77,9 @@ public:
     * @param searchUpDown An 8-bit unsigned integer specifying the direction of the search. Valid values are:
     * TEA5767_SEARCH_UP
     * TEA5767_SEARCH_DOWN
-    * @note This function updates the TEA5757_t structure pointed to by radio and writes the updated values to the tuner.
-    */
+    * 
+    * */
     void tea5767_setSearch(uint8_t searchMode, uint8_t searchUpDown);
-
-    /*! @brief Checks if the given frequency is within the limits of the current band mode of the TEA5757 radio.
-    * This function checks if the given frequency is within the limits of the current band mode of the TEA5757 radio, and adjusts it if necessary.
-    * @param radio A pointer to a TEA5757_t structure that holds information about the radio, including its current band mode.
-    * @param freq The frequency to check.
-    * @return float The frequency adjusted if it is out of bounds for the current band mode, or the original frequency if it is within bounds.
-    * @note The function assumes that the TEA5757_t structure pointed to by radio has its band_mode field set correctly.
-    */
-    float tea5767_checkFreqLimits(float freq);
 
     /*! @brief Sets the frequency of the TEA5757 tuner.
     * This function sets the frequency of the TEA5757 tuner to the given value.
@@ -187,6 +172,22 @@ public:
     * \param radio Variable of type TEA5767_t.
     */
     void tea5767_write_registers();
+
+    /*! @brief Initializes the TEA5757_t structure for the TEA5757 tuner.
+    * This function initializes the TEA5757_t structure with the default values for the TEA5757 tuner.
+    * The default I2C address of the tuner is 0x60.
+    * @note This function must be called before using any other function related to the TEA5757 tuner.
+    */
+    int tea5767_getReady();
+
+    /*! @brief Checks if the given frequency is within the limits of the current band mode of the TEA5757 radio.
+    * This function checks if the given frequency is within the limits of the current band mode of the TEA5757 radio, and adjusts it if necessary.
+    * @param radio A pointer to a TEA5757_t structure that holds information about the radio, including its current band mode.
+    * @param freq The frequency to check.
+    * @return float The frequency adjusted if it is out of bounds for the current band mode, or the original frequency if it is within bounds.
+    * @note The function assumes that the TEA5757_t structure pointed to by radio has its band_mode field set correctly.
+    */
+    float tea5767_checkFreqLimits(float freq);
 
     uint8_t _address;                //< I2C device address
     uint8_t _mute_mode;              //< Audio mute mode
