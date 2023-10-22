@@ -34,9 +34,6 @@ class tea5767_i2c
 {
 public:  
 
-    /************************************
-     * EXPORTED VARIABLES
-     ************************************/
     tea5767_i2c(uint8_t band_mode); // Constructor
 
     /************************************
@@ -44,27 +41,6 @@ public:
      ************************************/
     // ----------------------------------------------------------------------------
     // Setup
-
-    /*! \brief   Read all five bytes from TEA5767 w/o format.
-    *  \ingroup tea5767_i2c
-    *
-    * Reads five bytes from the TEA5767_t variable and fills the buffer variable.
-    *
-    * \param radio From type TEA5767_t.
-    * \param buffer \ref TEA5767_REGISTERS amount to this variable.
-    */
-    void tea5767_read_raw(uint8_t *buffer);
-
-
-    /*! \brief   Writes all five bytes from TEA5767 with format.
-    *  \ingroup tea5767_i2c
-    *
-    * Writtes five bytes to the TEA5767_t variable and fills the buffer variable.
-    * The data from the radio variable is modified to fit the memory map of TEA5767.
-    *
-    * \param radio Variable of type TEA5767_t.
-    */
-    void tea5767_write_registers();
 
     /*! \brief   Initialize an struct with the parameters needed for initialization.
     *  \ingroup tea5767_i2c
@@ -187,7 +163,31 @@ public:
     */
     void tea5767_setStereo(bool stereo);
 
-private:
+ private:
+
+    void printStatus();
+
+    /*! \brief   Read all five bytes from TEA5767 w/o format.
+    *  \ingroup tea5767_i2c
+    *
+    * Reads five bytes from the TEA5767_t variable and fills the buffer variable.
+    *
+    * \param radio From type TEA5767_t.
+    * \param buffer \ref TEA5767_REGISTERS amount to this variable.
+    */
+    void tea5767_read_raw(uint8_t *buffer);
+
+
+    /*! \brief   Writes all five bytes from TEA5767 with format.
+    *  \ingroup tea5767_i2c
+    *
+    * Writtes five bytes to the TEA5767_t variable and fills the buffer variable.
+    * The data from the radio variable is modified to fit the memory map of TEA5767.
+    *
+    * \param radio Variable of type TEA5767_t.
+    */
+    void tea5767_write_registers();
+
     uint8_t _address;                //< I2C device address
     uint8_t _mute_mode;              //< Audio mute mode
     uint8_t _band_mode;              //< Frequency band mode
