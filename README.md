@@ -59,4 +59,58 @@ Sets the frequency of the TEA5757 tuner.
 This function sets the frequency of the TEA5757 tuner to the given value.
 If the frequency is out of range for the current band mode, it will be adjusted to the nearest valid frequency.
 After setting the frequency, the new value will be written to the tuner through the `tea5767_write_registers` function.
+
 `freq` The desired frequency to set the tuner to.
+
+void tea5767_setStationInc(float freq)
+--------------------------------------
+Increments the current frequency of the TEA5757 radio by a given value.
+This function increases the current frequency of the TEA5757 radio by a given value.
+If the given value is negative, the search mode is set to down, otherwise the search mode is set to up.
+The frequency is then incremented by the given value, but it is first checked to ensure that it
+is within the frequency limits specified by the radio's band mode. The resulting frequency is then
+written to the radio using the tea5767_write_registers function.
+
+`freq` The frequency increment value.
+
+void tea5767_setMute(bool mute)
+-------------------------------
+Sets the mute mode of the TEA5757 tuner.
+This function sets the mute mode of the TEA5757 tuner to the specified value. When mute mode is enabled,
+the audio output is muted.
+
+`mute` The desired mute mode value. true to enable mute mode, false to disable it.
+  
+void tea5767_setSoftMute(bool mute)
+-----------------------------------
+Sets the soft mute mode of the TEA5767 radio.
+This function sets the soft mute mode of the TEA5767 radio to either on or off.
+
+`mute` A boolean indicating whether the soft mute mode should be on (true) or off (false).
+
+void tea5767_setMuteLeft(bool mute)
+-----------------------------------
+Sets the left channel mute mode for the TEA5767 radio.
+
+`mute` Boolean value indicating whether the left channel should be muted.
+    
+void tea5767_setMuteRight(bool mute)
+------------------------------------
+Sets the right channel mute mode for the TEA5767 radio.
+
+`mute` Boolean value indicating whether the left channel should be muted.
+    
+void tea5767_setStandby(bool standby)
+-------------------------------------
+Sets the standby mode of the TEA5757 radio.
+This function sets the standby mode of the TEA5757 radio. When the radio is in standby mode, it consumes less power but cannot receive signals.
+
+`standby` Set to true to activate standby mode, false to deactivate it.
+    
+void tea5767_setStereo(bool stereo)
+-----------------------------------
+Sets the stereo mode of the TEA5757 radio.
+This function sets the stereo mode of the TEA5757 radio. When the radio is in stereo mode, it receives stereo signals if available. When in mono mode, it receives only mono signals.
+
+`stereo` Set to true to activate stereo mode, false to activate mono mode.
+    
