@@ -1,4 +1,4 @@
-tea5767_i2c
+TEA5767 Ardunio driver for RP2040
 =============
 I2C Driver for NXP FM Radio module
 
